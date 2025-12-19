@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.LeaveRequestDto;
 import com.example.demo.service.LeaveRequestService;
-import jakarta.validation.Valid;   // ✅ IMPORTANT IMPORT
+import jakarta.validation.Valid;  
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,7 +15,6 @@ public class LeaveRequestController {
         this.service = service;
     }
 
-    // ✅ SINGLE POST API WITH VALIDATION
     @PostMapping("/apply")
     public LeaveRequestDto applyLeave(@Valid @RequestBody LeaveRequestDto dto) {
         return service.create(dto);
