@@ -1,4 +1,11 @@
+package com.example.demo.controller;
+
+import com.example.demo.dto.CapacityAnalysisResultDto;
+import com.example.demo.service.CapacityAnalysisService;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+
 @RestController
 @RequestMapping("/api/capacity-alerts")
 public class CapacityAlertController {
@@ -13,8 +20,8 @@ public class CapacityAlertController {
     public CapacityAnalysisResultDto analyze(
             @RequestParam String teamName,
             @RequestParam String start,
-            @RequestParam String end
-    ) {
+            @RequestParam String end) {
+
         return service.analyzeTeamCapacity(
                 teamName,
                 LocalDate.parse(start),

@@ -1,3 +1,7 @@
+package com.example.demo.controller;
+
+import com.example.demo.model.TeamCapacityConfig;
+import com.example.demo.service.TeamCapacityRuleService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

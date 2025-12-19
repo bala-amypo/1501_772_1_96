@@ -1,3 +1,7 @@
+package com.example.demo.controller;
+
+import com.example.demo.dto.LeaveRequestDto;
+import com.example.demo.service.LeaveRequestService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
