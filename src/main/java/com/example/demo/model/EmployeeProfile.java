@@ -9,12 +9,23 @@ public class EmployeeProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Employee ID is required")
     private String employeeId;
+
+    @NotBlank(message = "Full name is required")
     private String fullName;
+
+    @Email(message = "Invalid email format")
+    @NotBlank(message = "Email is required")
     private String email;
-    private String teamName;
+
+    @NotBlank(message = "Role is required")
     private String role;
-    private boolean active;
+
+    @NotBlank(message = "Team name is required")
+    private String teamName;
+
+    private boolean active = true;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

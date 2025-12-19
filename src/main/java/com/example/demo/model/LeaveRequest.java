@@ -6,18 +6,28 @@ import java.time.LocalDate;
 @Entity
 public class LeaveRequest {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private EmployeeProfile employee;
-
+    @NotNull(message = "Start date is required")
     private LocalDate startDate;
+
+    @NotNull(message = "End date is required")
     private LocalDate endDate;
+
+    @NotBlank(message = "Leave type is required")
     private String type;
+
+    @NotBlank(message = "Reason is required")
     private String reason;
-    private String status;
+
+    private String status = "PENDING";
+
+    @ManyToOne
+    @NotNull(message = "Employee is required")
+    private EmployeeProfile employee;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
