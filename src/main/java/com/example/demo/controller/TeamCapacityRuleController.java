@@ -1,3 +1,5 @@
+import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping("/api/capacity-rules")
 public class TeamCapacityRuleController {
