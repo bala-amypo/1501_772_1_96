@@ -56,4 +56,33 @@ public class EmployeeProfileServiceImpl implements EmployeeProfileService {
     public EmployeeProfileDto getById(Long id) {
         return repository.findById(id)
                 .map(this::toDto)
-                .orElseThrow(() -> new ResourceNotFoundEx
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+    }
+
+    @Override
+    public List<EmployeeProfileDto> getByTeam(String teamName) {
+        return repository.findByTeamNameAndActiveTrue(teamName)
+                .stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<EmployeeProfileDto> getAll() {
+        return repository.findAll()
+                .stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
+    private EmployeeProfileDto toDto(EmployeeProfile emp) {
+        EmployeeProfileDto dto = new EmployeeProfileDto();
+        dto.setId(emp.getId());
+        dto.setEmployeeId(emp.getEmployeeId());
+        dto.setFullName(emp.getFullName());
+        dto.setEmail(emp.getEmail());
+        dto.setTeamName(emp.getTeamName());
+        dto.setRole(emp.getRole());
+        return dto;
+    }
+}
