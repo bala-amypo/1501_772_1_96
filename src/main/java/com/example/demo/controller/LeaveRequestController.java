@@ -18,6 +18,10 @@ public class LeaveRequestController {
     public LeaveRequestDto create(@RequestBody LeaveRequestDto dto) {
         return service.create(dto);
     }
+    @PostMapping("/apply")
+    public LeaveRequestDto applyLeave(@Valid @RequestBody LeaveRequestDto dto) {
+      return service.create(dto);
+    }
 
     @PutMapping("/{id}/approve")
     public LeaveRequestDto approve(@PathVariable Long id) {
