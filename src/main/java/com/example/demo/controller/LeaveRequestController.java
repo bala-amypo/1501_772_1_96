@@ -16,7 +16,7 @@ public class LeaveRequestController {
     }
 
     @PostMapping("/apply")
-    public LeaveRequestDto applyLeave(@Valid @RequestBody LeaveRequestDto dto) {
+    public LeaveRequestDto applyLeave(@RequestBody LeaveRequestDto dto) {
         return service.create(dto);
     }
 
