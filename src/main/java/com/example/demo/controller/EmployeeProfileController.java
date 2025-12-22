@@ -23,7 +23,8 @@ public class EmployeeProfileController {
 
     @PutMapping("/{id}")
     public EmployeeProfileDto update(@PathVariable Long id, @RequestBody EmployeeProfileDto dto) {
-        return service.update(id, dto);
+        
+    }        return service.update(id, dto);
     }
 
     @GetMapping("/{id}")
