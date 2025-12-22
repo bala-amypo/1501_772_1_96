@@ -17,15 +17,9 @@ public class CapacityAlertController {
     }
 
     @PostMapping("/analyze")
-    public CapacityAnalysisResultDto analyze(
-            @RequestParam String teamName,
-            @RequestParam String start,
-            @RequestParam String end) {
+    public CapacityAnalysisResultDto analyze(@RequestParam String teamName,@RequestParam String start,@RequestParam String end) {
 
-        return service.analyzeTeamCapacity(
-                teamName,
-                LocalDate.parse(start),
-                LocalDate.parse(end)
+        return service.analyzeTeamCapacity(teamName,LocalDate.parse(start),LocalDate.parse(end)
         );
     }
 }
