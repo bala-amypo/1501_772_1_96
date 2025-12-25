@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.LeaveRequestDto;
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.EmployeeProfile;
 import com.example.demo.model.LeaveRequest;
@@ -29,6 +30,10 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
     @Override
     public LeaveRequestDto create(LeaveRequestDto dto) {
 
+        if (dto.getStartDate().isAfter(dto.getEndDate())) {
+            throw new BadRequestException("Start date after end date");
+        }
+
         EmployeeProfile emp = employeeRepo.findById(dto.getEmployeeId())
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
 
@@ -38,6 +43,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
         leave.setEndDate(dto.getEndDate());
         leave.setType(dto.getType());
         leave.setReason(dto.getReason());
+        leave.setStatus("PENDING");
 
         LeaveRequest saved = leaveRepo.save(leave);
         return toDto(saved);
@@ -82,11 +88,13 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 
     private LeaveRequestDto toDto(LeaveRequest leave) {
         LeaveRequestDto dto = new LeaveRequestDto();
+        dto.setId(leave.getId());
         dto.setEmployeeId(leave.getEmployee().getId());
         dto.setStartDate(leave.getStartDate());
         dto.setEndDate(leave.getEndDate());
         dto.setType(leave.getType());
         dto.setReason(leave.getReason());
+        dto.setStatus(leave.getStatus());
         return dto;
     }
 }
