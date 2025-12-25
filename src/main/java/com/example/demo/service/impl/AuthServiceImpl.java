@@ -39,10 +39,7 @@ public class AuthServiceImpl implements AuthService {
 
         String token = tokenProvider.generateToken(user);
 
-        AuthResponse response = new AuthResponse();
-        response.setToken(token);
-        response.setUserId(user.getId());
-
-        return response;
+        // ✅ CORRECT: use constructor
+        return new AuthResponse(token, user.getId());
     }
 }
