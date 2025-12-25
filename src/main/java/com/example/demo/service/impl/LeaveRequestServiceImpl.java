@@ -37,24 +37,33 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 
         LeaveRequest saved = leaveRepo.save(leave);
 
-        return mapToDto(saved);
+        LeaveRequestDto response = new LeaveRequestDto();
+        response.setEmployeeId(employee.getId());
+        response.setStartDate(saved.getStartDate());
+        response.setEndDate(saved.getEndDate());
+        response.setType(saved.getType());
+        response.setReason(saved.getReason());
+
+        return response;
     }
 
     @Override
     public LeaveRequestDto approve(Long id) {
         LeaveRequest leave = leaveRepo.findById(id).orElseThrow();
         leave.setStatus("APPROVED");
-        return mapToDto(leaveRepo.save(leave));
+        leaveRepo.save(leave);
+        return createResponse(leave);
     }
 
     @Override
     public LeaveRequestDto reject(Long id) {
         LeaveRequest leave = leaveRepo.findById(id).orElseThrow();
         leave.setStatus("REJECTED");
-        return mapToDto(leaveRepo.save(leave));
+        leaveRepo.save(leave);
+        return createResponse(leave);
     }
 
-    private LeaveRequestDto mapToDto(LeaveRequest leave) {
+    private LeaveRequestDto createResponse(LeaveRequest leave) {
         LeaveRequestDto dto = new LeaveRequestDto();
         dto.setEmployeeId(leave.getEmployee().getId());
         dto.setStartDate(leave.getStartDate());
