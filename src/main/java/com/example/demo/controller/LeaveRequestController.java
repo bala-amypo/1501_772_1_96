@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.LeaveRequestDto;
 import com.example.demo.service.LeaveRequestService;
-import jakarta.validation.Valid;  
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
