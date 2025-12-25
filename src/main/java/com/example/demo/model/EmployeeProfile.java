@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class EmployeeProfile {
 
@@ -11,76 +14,55 @@ public class EmployeeProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Employee ID required")
+    @NotBlank
     private String employeeId;
 
-    @NotBlank(message = "Full name required")
+    @NotBlank
     private String fullName;
 
-    @Email(message = "Invalid email")
+    @Email
     private String email;
 
-    @NotBlank(message = "Role required")
+    @NotBlank
     private String role;
 
-    @NotBlank(message = "Team name required")
+    @NotBlank
     private String teamName;
 
     private boolean active = true;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToMany
+    @JoinTable(
+            name = "employee_colleagues",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "colleague_id")
+    )
+    private Set<EmployeeProfile> colleagues = new HashSet<>();
 
-    public String getEmployeeId() {
-        return employeeId;
-    }
+    // getters & setters
 
-    public String getFullName() {
-        return fullName;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getEmployeeId() { return employeeId; }
+    public void setEmployeeId(String employeeId) { this.employeeId = employeeId; }
 
-    public String getRole() {
-        return role;
-    }
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
 
-    public String getTeamName() {
-        return teamName;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public boolean isActive() {
-        return active;
-    }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getTeamName() { return teamName; }
+    public void setTeamName(String teamName) { this.teamName = teamName; }
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
-    }
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
+    public Set<EmployeeProfile> getColleagues() {
+        return colleagues;
     }
 }
