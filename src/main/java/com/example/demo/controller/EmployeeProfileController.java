@@ -1,9 +1,9 @@
 package com.example.demo.controller;
-import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.dto.EmployeeProfileDto;
 import com.example.demo.service.EmployeeProfileService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -16,22 +16,28 @@ public class EmployeeProfileController {
         this.service = service;
     }
 
+
     @PostMapping
     public EmployeeProfileDto create(@RequestBody EmployeeProfileDto dto) {
         return service.create(dto);
     }
 
+    
     @PutMapping("/{id}")
-    public EmployeeProfileDto update(@PathVariable Long id, @RequestBody EmployeeProfileDto dto) {
-        
-    }        return service.update(id, dto);
+    public EmployeeProfileDto update(
+            @PathVariable Long id,
+            @RequestBody EmployeeProfileDto dto
+    ) {
+        return service.update(id, dto);
     }
 
+ 
     @GetMapping("/{id}")
     public EmployeeProfileDto get(@PathVariable Long id) {
         return service.getById(id);
     }
 
+   
     @GetMapping("/team/{teamName}")
     public List<EmployeeProfileDto> byTeam(@PathVariable String teamName) {
         return service.getByTeam(teamName);
