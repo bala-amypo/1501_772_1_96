@@ -3,7 +3,6 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
 import java.time.LocalDate;
 
 @Entity
@@ -13,22 +12,24 @@ public class LeaveRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Start date required")
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
+    private EmployeeProfile employee;
+
+    @NotNull
     private LocalDate startDate;
 
-    @NotNull(message = "End date required")
+    @NotNull
     private LocalDate endDate;
 
-    @NotBlank(message = "Reason required")
-    private String reason;
-
-    @NotBlank(message = "Type required")
+    @NotBlank
     private String type;
+
+    private String reason;
 
     private String status = "PENDING";
 
-    @ManyToOne
-    private EmployeeProfile employee;
+
 
     public Long getId() {
         return id;
@@ -85,4 +86,5 @@ public class LeaveRequest {
     public void setEmployee(EmployeeProfile employee) {
         this.employee = employee;
     }
+ 
 }
