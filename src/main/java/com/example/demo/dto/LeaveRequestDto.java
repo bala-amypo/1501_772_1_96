@@ -12,7 +12,7 @@ public class LeaveRequestDto {
     private String reason;
     private String status;
 
-    // getters & setters
+   
 
     public Long getId() {
         return id;
