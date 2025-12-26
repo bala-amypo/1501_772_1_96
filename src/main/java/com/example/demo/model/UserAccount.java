@@ -9,24 +9,19 @@ public class UserAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // ✅ ADD THIS
-    @Column(nullable = false)
-    private String username;
-
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String email;
 
     private String password;
+
     private String role;
 
-    // getters and setters
+    @OneToOne
+    private EmployeeProfile employeeProfile;
+
 
     public Long getId() {
         return id;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public String getEmail() {
@@ -41,12 +36,12 @@ public class UserAccount {
         return role;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public EmployeeProfile getEmployeeProfile() {
+        return employeeProfile;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setEmail(String email) {
@@ -59,5 +54,9 @@ public class UserAccount {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setEmployeeProfile(EmployeeProfile employeeProfile) {
+        this.employeeProfile = employeeProfile;
     }
 }
