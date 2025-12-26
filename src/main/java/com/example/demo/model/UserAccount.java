@@ -9,55 +9,41 @@ public class UserAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // ✅ ADD THIS
     @Column(nullable = false)
     private String username;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     private String password;
     private String role;
 
-    // getters and setters
-
-    public Long getId() {
-        return id;
+    // ✅ AUTO-SET USERNAME BEFORE SAVE
+    @PrePersist
+    public void setUsernameFromEmail() {
+        if (this.username == null && this.email != null) {
+            this.username = this.email;   // 👈 AUTO FIX
+        }
     }
 
-    public String getUsername() {
-        return username;
-    }
+    // getters & setters
+    public Long getId() { return id; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getUsername() { return username; }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getEmail() { return email; }
 
-    public String getRole() {
-        return role;
-    }
+    public String getPassword() { return password; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getRole() { return role; }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    public void setId(Long id) { this.id = id; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setUsername(String username) { this.username = username; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setEmail(String email) { this.email = email; }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+    public void setPassword(String password) { this.password = password; }
+
+    public void setRole(String role) { this.role = role; }
 }
