@@ -12,18 +12,18 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-            // Disable CSRF for APIs
+           
             .csrf(csrf -> csrf.disable())
 
-            // Allow all requests (no login page)
+        
             .authorizeHttpRequests(auth -> auth
                     .anyRequest().permitAll()
             )
 
-            // Disable default login page
+            
             .formLogin(form -> form.disable())
 
-            // Disable basic auth popup
+          
             .httpBasic(basic -> basic.disable());
 
         return http.build();
