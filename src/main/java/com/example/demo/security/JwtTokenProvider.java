@@ -12,16 +12,13 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
-    // ✅ VALID BASE64 SAFE SECRET (length > 32)
+   
     private static final String SECRET =
             "my-super-secure-jwt-secret-key-which-is-long-enough-12345";
 
     private final Key key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
     private final long EXPIRATION = 1000 * 60 * 60; // 1 hour
 
-    // =========================
-    // TOKEN GENERATION
-    // =========================
     public String generateToken(UserAccount user) {
         return Jwts.builder()
                 .setSubject(String.valueOf(user.getId())) // fallback subject
@@ -34,9 +31,6 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    // =========================
-    // TOKEN PARSING
-    // =========================
     private Claims getClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
