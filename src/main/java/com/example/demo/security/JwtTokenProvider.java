@@ -60,7 +60,7 @@ public class JwtTokenProvider {
         Claims claims = getClaims(token);
         Long id = claims.get("userId", Long.class);
         if (id != null) return id;
-        // fallback to subject
+       
         return Long.valueOf(claims.getSubject());
     }
 }
