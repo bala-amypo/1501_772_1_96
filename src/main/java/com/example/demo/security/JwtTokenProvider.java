@@ -17,7 +17,7 @@ public class JwtTokenProvider {
             "my-super-secure-jwt-secret-key-which-is-long-enough-12345";
 
     private final Key key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
-    private final long EXPIRATION = 1000 * 60 * 60; // 1 hour
+    private final long EXPIRATION = 1000 * 60 * 60; 
 
     public String generateToken(UserAccount user) {
         return Jwts.builder()
